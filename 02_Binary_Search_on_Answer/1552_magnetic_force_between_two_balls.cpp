@@ -3,7 +3,7 @@
 // Pattern: Binary Search on Answer
 // Time: O(n log range)
 // Space: O(1)
-
+// Maximize the minimum
 class Solution {
 public:
     bool canDistribute(vector<int>& position, int m , int F){
