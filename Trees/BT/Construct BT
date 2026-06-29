@@ -1,0 +1,36 @@
+Maintain four variable:
+For example in pre and inorder maintain: preLow, preHigh, inLow, inHigh.
+Play with it after finding the root node. 
+We can find root node using unordered map.
+
+class Solution {
+public:
+    TreeNode* build(vector<int> &pre, int preLow, int preHigh, vector<int> &in, int inLow, int inHigh){
+        if(preLow > preHigh) return NULL;
+
+        TreeNode* root = new TreeNode(pre[preLow]);
+        if(preLow == preHigh) return root;
+
+        int i = inLow;
+        for(; i<=inHigh; i++){
+            if(pre[preLow] == in[i]) break;
+        }
+        int lc = i - inLow;
+
+        root->left = build(pre, preLow + 1, preLow + lc, in, inLow, i-1);
+        root->right = build(pre, preLow + lc + 1, preHigh, in, i+1, inHigh);
+
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        int n = preorder.size();
+        
+        return build(preorder, 0, n - 1, inorder, 0, n - 1);
+    }
+};
+
+
+//Using maps to store index
+for(int i = 0; i < inorder.size(); i++){
+  mp[inorder[i]] = i;
+}
